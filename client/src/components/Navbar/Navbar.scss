@@ -1,0 +1,30 @@
+nav{
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.navWrap{
+    display: flex;
+    margin: auto;
+    width: 80%;
+    min-height: 100px;
+    justify-content: space-evenly;
+    align-items: center;
+    z-index: 2;
+}
+
+a{
+  color: #000;
+}
+
+.dropdown-menu{
+  z-index: 3;
+}
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+	.nav-blur {
+	  -webkit-backdrop-filter: blur(10px);
+	  backdrop-filter: blur(10px);
+	  background-color: rgba( 100, 100, 100, 0.7);
+	}
+  }

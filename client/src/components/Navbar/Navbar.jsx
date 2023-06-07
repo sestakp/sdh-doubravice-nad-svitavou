@@ -6,12 +6,12 @@ function Navbar(){
         <nav className="nav-blur">       
             <div className="navWrap">  
                 <div>     
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown-about" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown-about" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         O sboru
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown-about">
-                        <li><a class="dropdown-item" href="#">Složení výboru</a></li>
-                        <li><a class="dropdown-item" href="#">Složení JSDH</a></li>
+                        <li><a class="dropdown-item" href="/slozeni-vyboru">Složení výboru</a></li>
+                        <li><a class="dropdown-item" href="/slozeni-jednotek">Složení JSDH</a></li>
                         <li><a class="dropdown-item" href="#">Mladí hasiči</a></li>
                     </ul>
                 </div>

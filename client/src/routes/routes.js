@@ -4,6 +4,14 @@ const ROUTES = [
         name: 'home',
         path: '/',
     },
+    {
+        name: 'CompositionOfTheCommittee',
+        path: '/slozeni-vyboru'
+    },
+    {
+        name: 'CompositionOfTheUnits',
+        path: '/slozeni-jednotek'
+    }
 
 ];
 

@@ -7,6 +7,7 @@ import { storage, db } from '../../firebase';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import DeleteIcon from '@mui/icons-material/Delete';
 import NewCard from "../../components/NewCard/NewCard";
+import moment from "moment";
 
 const style = {
     position: 'absolute',
@@ -29,6 +30,7 @@ const News = (props) => {
     const { currentUser } = useAuth()
 
     const [modalOpen, setModalOpen] = useState(false)
+    const [id, setId] = useState(null)
     const [images, setImages] = useState([])
     const [header, setHeader] = useState("")
     const [date, setDate] = useState(null)
@@ -36,6 +38,29 @@ const News = (props) => {
     const [description, setDescription] = useState("")
     const [uploadProgress, setUploadProgress] = useState(0);
     //console.log("upload progress: ", uploadProgress)
+    const dateFormat = 'DD. MM. YYYY';
+
+    useEffect(() => {
+        console.log("modal use effect ", id)
+        if( ! modalOpen) return;
+        if( id == null){
+            setImages([])
+            setHeader("")
+            setDate(null)
+            setCategory("Ostatní")
+            setDescription("")
+            return;
+        } 
+
+        var record = newsData.filter(x => x.id == id)[0]
+        if(record == undefined) return;
+        console.log("record: ", record);
+        setHeader(record.header);
+        setDate(moment(record.date, dateFormat))
+        setCategory(record.category)
+        setDescription(record.description)
+        setImages(record.imageUrls)
+    },[modalOpen])
 
     useEffect(() => {
         const newsRef = db.collection("News");
@@ -86,7 +111,7 @@ const News = (props) => {
                 header,
                 category,
                 description,
-                date: date?.format('DD. MM. YYYY') ?? "",
+                date: date?.format(dateFormat) ?? "",
                 imageUrls
             }
 
@@ -103,6 +128,7 @@ const News = (props) => {
         setDate(null)
         setCategory("Ostatní")
         setDescription("")
+        setId(null)
         setModalOpen(false)
     }
     console.log("news Data : ", newsData)
@@ -115,11 +141,11 @@ const News = (props) => {
                 } 
             </div>          
             <div>
-                {newsData.map(data => <NewCard data={data} />)}
+                {newsData.map(data => <NewCard data={data} setModalOpen={setModalOpen} setId={setId}/>)}
             </div>
             <Modal
                 open={modalOpen}
-                onClose={() => setModalOpen(false)}
+                onClose={() => {setModalOpen(false); setId(null);}}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
                 >
@@ -168,11 +194,15 @@ const News = (props) => {
                     <DropzoneArea 
                         filesLimit={999}
                         acceptedFiles={['image/*']}
+                        files={images}
                         onChange={(files) => setImages(files)} 
                     />
+                    {id != null && newsData.filter(x => x.id == id)[0]?.imageUrls?.map((url, index) => (
+                        <img key={index} src={url} alt={`Default Image ${index + 1}`} />
+                    ))}
                     <div style={{display:"flex", justifyContent: "center", marginTop: "10px"}}>
                         <Button variant="contained" onClick={() => AddOrUpdateNew() }>Uložit</Button>
-                        <Button variant="contained" onClick={() => setModalOpen(false)}>Zavřít</Button>
+                        <Button variant="contained" onClick={() => {setModalOpen(false); setId(null);}}>Zavřít</Button>
                     </div>
                     </Typography>
                 </Box>

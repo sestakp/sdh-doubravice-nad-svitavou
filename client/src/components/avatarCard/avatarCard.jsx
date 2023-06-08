@@ -8,6 +8,7 @@ function AvatarCard(props){
             <p>{props.name}</p>
             <img src={props.img ?? avatar}></img>
             <p>{props.role}</p>
+            <p>{props.tel}</p>
         </div>
     )
 }

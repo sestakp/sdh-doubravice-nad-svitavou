@@ -11,6 +11,22 @@ const ROUTES = [
     {
         name: 'CompositionOfTheUnits',
         path: '/slozeni-jednotek'
+    },    
+    {
+        name: 'YoungFirefighters',
+        path: '/mladi-hasici'
+    },
+    {
+        name: 'Contact',
+        path: '/kontakt'
+    },
+    {
+        name: 'Login',
+        path: '/prihlaseni'
+    },
+    {
+        name: 'News',
+        path: '/novinky'
     }
 
 ];

@@ -1,9 +1,12 @@
-import { Box, Button, MenuItem, Modal, Select, TextField, Typography } from "@mui/material"
-import { useState } from "react"
+import { Box, Button, Card, Grid, MenuItem, Modal, Paper, Select, TextField, Typography } from "@mui/material"
+import { useEffect, useState } from "react"
 import { useAuth } from "../../contexts/AuthContext"
 import {DropzoneArea} from 'material-ui-dropzone'
 import "./News.css";
 import { storage, db } from '../../firebase';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import DeleteIcon from '@mui/icons-material/Delete';
+import NewCard from "../../components/NewCard/NewCard";
 
 const style = {
     position: 'absolute',
@@ -15,26 +18,45 @@ const style = {
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
+    overflowY: "scroll",
+    maxHeight: "100vh",
   };
 
 
 const News = (props) => {
     
+    const [newsData, setNewsData] = useState([]);
     const { currentUser } = useAuth()
 
     const [modalOpen, setModalOpen] = useState(false)
     const [images, setImages] = useState([])
     const [header, setHeader] = useState("")
+    const [date, setDate] = useState(null)
     const [category, setCategory] = useState("Ostatní")
     const [description, setDescription] = useState("")
     const [uploadProgress, setUploadProgress] = useState(0);
-    console.log("upload progress: ", uploadProgress)
-    
-    
-    
+    //console.log("upload progress: ", uploadProgress)
+
+    useEffect(() => {
+        const newsRef = db.collection("News");
+      
+        const unsubscribe = newsRef.onSnapshot((snapshot) => {
+          const data = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data()
+          }));
+          setNewsData(data);
+        });
+      
+        return () => {
+          // Unsubscribe from the snapshot listener when the component unmounts
+          unsubscribe();
+        };
+      }, []);
+
+
+
     async function AddOrUpdateNew(){
-
-
         try {
             const imageUrls = [];
       
@@ -60,29 +82,30 @@ const News = (props) => {
               const imageUrl = await storageRef.getDownloadURL();
               imageUrls.push(imageUrl);
             }
-            const record = {
+            var record = {
                 header,
                 category,
                 description,
+                date: date?.format('DD. MM. YYYY') ?? "",
                 imageUrls
             }
 
             console.log("record to save: ", record)
             
-            db.collection("News").doc()
-              .set(record)
+            db.collection("News").add(record)
         }
         catch(e){
-
+            console.log("adding error: ", e)
         }
 
         setImages([])
         setHeader("")
+        setDate(null)
         setCategory("Ostatní")
         setDescription("")
         setModalOpen(false)
     }
-
+    console.log("news Data : ", newsData)
     return (
         <div>
             <div style={{display: "flex", justifyContent: "space-between"}}>
@@ -91,7 +114,9 @@ const News = (props) => {
                     <Button variant="contained" onClick={() => setModalOpen(!modalOpen)}>Přidat novinku</Button>
                 } 
             </div>          
-
+            <div>
+                {newsData.map(data => <NewCard data={data} />)}
+            </div>
             <Modal
                 open={modalOpen}
                 onClose={() => setModalOpen(false)}
@@ -139,13 +164,13 @@ const News = (props) => {
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                     />
-
+                    <DatePicker label="Vyberte datum aktuality" value={date} onChange={(newValue) => setDate(newValue)}/>
                     <DropzoneArea 
                         filesLimit={999}
                         acceptedFiles={['image/*']}
                         onChange={(files) => setImages(files)} 
                     />
-                    <div style={{display:"flex"}}>
+                    <div style={{display:"flex", justifyContent: "center", marginTop: "10px"}}>
                         <Button variant="contained" onClick={() => AddOrUpdateNew() }>Uložit</Button>
                         <Button variant="contained" onClick={() => setModalOpen(false)}>Zavřít</Button>
                     </div>

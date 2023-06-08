@@ -6,6 +6,8 @@ import Layout from "./layout/Layout";
 import { AuthProvider } from './contexts/AuthContext';
 import { ThemeProvider, createTheme } from "@mui/material";
 import { grey, orange } from "@mui/material/colors";
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
 
 function App() {
   const theme = createTheme({
@@ -23,6 +25,7 @@ function App() {
 
   return (
     <div className='main'>
+      <LocalizationProvider dateAdapter={AdapterMoment}>
       <ThemeProvider theme={theme}>
         <div className="overlay"></div>
         <video src={videoBackground} autoPlay loop muted style={{position: 'fixed'}}/>
@@ -32,6 +35,7 @@ function App() {
           </AuthProvider>
         </div>
       </ThemeProvider>
+      </LocalizationProvider>
     </div>
   );
 }

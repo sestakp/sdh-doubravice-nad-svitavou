@@ -1,12 +1,11 @@
 import { Grid } from "@mui/material";
 import AvatarCard from "../../components/avatarCard/avatarCard";
-
-
+import "./Contact.css"
 
 const Contact = (props) => {
 
     return(
-        <div>
+        <div className="contact">
             <h1>Kontakt</h1>
             <p>V případě zájmu kontaktujte některého ze členů výboru.</p>
             <Grid container>
@@ -25,7 +24,7 @@ const Contact = (props) => {
             <p>213935862/0300</p>
 
             <p>Kontaktní email</p>
-            <p>sdhdoubravice@seznam.cz</p>
+            <a href="mailto:sdhdoubravice@seznam.cz">sdhdoubravice@seznam.cz</a>
         </div>
     )
 }

@@ -45,6 +45,7 @@ const Login = (props) => {
     return (
         <div>
             <Paper style={{padding: "20px"}}>
+            <h1>Přihlášení</h1>
             {error && <Alert variant="danger">{error}</Alert>}
                 <form onSubmit={handleSubmit}>
                     <TextField

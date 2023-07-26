@@ -1,3 +1,20 @@
 .MuiDropzoneArea-root{
     background-color: gray !important;
 }
+
+
+legend{
+    height: auto !important;
+    color: white !important;
+    
+}
+
+.select legend span {
+    opacity: 1 !important;
+    background-color: black;
+}
+
+legend {
+    visibility: visible !important;
+    overflow: initial !important;
+}

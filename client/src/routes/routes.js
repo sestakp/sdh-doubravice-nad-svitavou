@@ -27,8 +27,27 @@ const ROUTES = [
     {
         name: 'News',
         path: '/novinky'
+    },    
+    {
+        name: 'Cas20t815',
+        path: '/equipment/cas20t815'
+    },    
+    {
+        name: 'Cas25',
+        path: '/equipment/cas25'
+    },    
+    {
+        name: 'Pps8',
+        path: '/equipment/pps8'
+    },    
+    {
+        name: 'Pps12',
+        path: '/equipment/pps12'
+    },
+    {
+        name: 'GuestBook',
+        path: '/kniha-navstev'
     }
-
 ];
 
 const NavBarLinks = [

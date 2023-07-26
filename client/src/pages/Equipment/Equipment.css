@@ -1,0 +1,15 @@
+
+
+.dataRow {
+    display: flex;
+    justify-content: space-between;
+}
+
+.centered {
+    text-align: center;
+}
+
+h2, h3 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

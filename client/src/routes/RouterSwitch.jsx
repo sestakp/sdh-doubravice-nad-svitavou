@@ -11,6 +11,12 @@ import YoungFirefighters from '../pages/YoungFirefighters/YoungFirefighters';
 import Contact from '../pages/Contact/Contact';
 import Login from '../pages/Login/Login';
 import News from '../pages/News/News';
+import Cas20t815 from '../pages/Equipment/CAS20T815/Cas20t815';
+import Cas25 from '../pages/Equipment/CAS25/Cas25';
+import Pps8 from '../pages/Equipment/PPS8/Pps8';
+import Pps12 from '../pages/Equipment/PPS12/Pps12';
+import GuestBook from '../pages/guestBook/GuestBook';
+
 
 const RouterSwitch = () => {
     return (
@@ -48,10 +54,41 @@ const RouterSwitch = () => {
                         path={getRoute('Login').path}
                         exact
                     />
-                    
+
                     <Route
                         element={<News />}
                         path={getRoute('News').path}
+                        exact
+                    />
+                    
+                    <Route
+                        element={<Cas20t815 />}
+                        path={getRoute('Cas20t815').path}
+                        exact
+                    />
+
+                    
+                    <Route
+                        element={<Cas25 />}
+                        path={getRoute('Cas25').path}
+                        exact
+                    />
+                    
+                    <Route
+                        element={<Pps8 />}
+                        path={getRoute('Pps8').path}
+                        exact
+                    />
+
+                    <Route
+                        element={<Pps12 />}
+                        path={getRoute('Pps12').path}
+                        exact
+                    />
+
+                    <Route
+                        element={<GuestBook />}
+                        path={getRoute('GuestBook').path}
                         exact
                     />
 

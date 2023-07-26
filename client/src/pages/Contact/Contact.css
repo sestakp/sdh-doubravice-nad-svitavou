@@ -1,12 +1,8 @@
-.avatarCard{
-    padding: 20px;
-    text-align: center;
-}
-
-.avatarCard a, .avatarCard a:hover {
-    color: rgba(1, 111, 255, 0.938);
+.contact a, .contact a:hover {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
     text-decoration: none;
+    color: rgba(1, 111, 255, 0.938)
+    
 }

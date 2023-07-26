@@ -21,14 +21,19 @@ function App() {
       },
     },
   });
-
+  
+  if (process.env.NODE_ENV === 'production') {
+    console.log = () => {};
+    console.error = () => {};
+    console.warn = () => {};
+  }
 
   return (
     <div className='main'>
       <LocalizationProvider dateAdapter={AdapterMoment}>
       <ThemeProvider theme={theme}>
         <div className="overlay"></div>
-        <video src={videoBackground} autoPlay loop muted style={{position: 'fixed'}}/>
+        <video src={videoBackground} autoPlay loop muted/>
         <div className="content">
           <AuthProvider>
             <Layout />

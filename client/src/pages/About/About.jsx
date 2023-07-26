@@ -5,7 +5,7 @@ import "./About.css";
 
 function About(){
     return(
-        <div>
+        <div className="About">
             <h1>Úvodní slovo</h1>
             <div className="row p-2">
                 <div className="col-md-9">

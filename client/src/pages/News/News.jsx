@@ -1,20 +1,22 @@
 import { Box, Button, Card, Grid, MenuItem, Modal, Paper, Select, TextField, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
 import { useAuth } from "../../contexts/AuthContext"
-import {DropzoneArea} from 'material-ui-dropzone'
+import { DropzoneArea } from 'material-ui-dropzone'
 import "./News.css";
 import { storage, db } from '../../firebase';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import DeleteIcon from '@mui/icons-material/Delete';
 import NewCard from "../../components/NewCard/NewCard";
+import { makeStyles } from '@material-ui/core/styles';
 import moment from "moment";
+import 'moment/locale/cs';
 
 const style = {
     position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 800,
+    width: "80vw",
     bgcolor: 'rgba(0,0,0,0.9)',
     border: '2px solid #000',
     boxShadow: 24,
@@ -23,6 +25,11 @@ const style = {
     maxHeight: "100vh",
   };
 
+  const useStyles = makeStyles((theme) => ({
+    label: {
+      color: theme.palette.common.white, // Or any other light color
+    },
+  }));
 
 const News = (props) => {
     
@@ -35,11 +42,11 @@ const News = (props) => {
     const [header, setHeader] = useState("")
     const [date, setDate] = useState(null)
     const [category, setCategory] = useState("Ostatní")
+    const [categoryFilter, setCategoryFilter] = useState([])
     const [description, setDescription] = useState("")
     const [uploadProgress, setUploadProgress] = useState(0);
-    //console.log("upload progress: ", uploadProgress)
     const dateFormat = 'DD. MM. YYYY';
-
+    const classes = useStyles();
     useEffect(() => {
         console.log("modal use effect ", id)
         if( ! modalOpen) return;
@@ -114,8 +121,6 @@ const News = (props) => {
                 date: date?.format(dateFormat) ?? "",
                 imageUrls
             }
-
-            console.log("record to save: ", record)
             
             db.collection("News").add(record)
         }
@@ -131,17 +136,53 @@ const News = (props) => {
         setId(null)
         setModalOpen(false)
     }
-    console.log("news Data : ", newsData)
+
     return (
         <div>
             <div style={{display: "flex", justifyContent: "space-between"}}>
                 <h1>Novinky</h1>
+                <div style={{display: "flex", justifyContent: "flex-end", width: "25%"}}>
+                <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        label="Kategorie"
+                        style={{width: "70%", paddingRight: "10px"}}
+                        multiple
+                        value={categoryFilter}
+                        onChange={(e) => setCategoryFilter(e.target.value)}
+                        margin="normal"
+                        className={classes.label + ", select"}
+                    >
+                        <MenuItem value={"Soutěže"}>Soutěže</MenuItem>
+                        <MenuItem value={"Soutěže jiné obce"}>Soutěže jiné obce</MenuItem>
+                        <MenuItem value={"Plánovaná akce"}>Plánovaná akce</MenuItem>
+                        <MenuItem value={"Zásah"}>Zásah</MenuItem>
+                        <MenuItem value={"Schůze"}>Schůze</MenuItem>
+                        <MenuItem value={"Ostatní"}>Ostatní</MenuItem>
+                </Select>
                 {currentUser != undefined &&
                     <Button variant="contained" onClick={() => setModalOpen(!modalOpen)}>Přidat novinku</Button>
                 } 
+                
+                </div>
             </div>          
             <div>
-                {newsData.map(data => <NewCard data={data} setModalOpen={setModalOpen} setId={setId}/>)}
+                {newsData.filter(d => categoryFilter.length <= 0 || categoryFilter.includes(d.category))
+                .sort((a, b) => {
+                  // Sort logic here based on the date field
+                  const dateA = new Date(
+                    parseInt(a.date.split(".")[2]), // Year
+                    parseInt(a.date.split(".")[1]) - 1, // Month (Note: Months in Date objects are zero-indexed)
+                    parseInt(a.date.split(".")[0]) // Day
+                  );
+                  const dateB = new Date(
+                    parseInt(b.date.split(".")[2]), // Year
+                    parseInt(b.date.split(".")[1]) - 1, // Month (Note: Months in Date objects are zero-indexed)
+                    parseInt(b.date.split(".")[0]) // Day
+                  );
+                  return dateB - dateA;
+                })
+                .map(data => <NewCard data={data} setModalOpen={setModalOpen} setId={setId}/>)}
             </div>
             <Modal
                 open={modalOpen}
@@ -172,6 +213,7 @@ const News = (props) => {
                         value={category}
                         onChange={(e) => setCategory(e.target.value)}
                         margin="normal"
+                        className={classes.label + ", select"}
                     >
                         <MenuItem value={"Soutěže"}>Soutěže</MenuItem>
                         <MenuItem value={"Soutěže jiné obce"}>Soutěže jiné obce</MenuItem>
@@ -190,7 +232,7 @@ const News = (props) => {
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                     />
-                    <DatePicker label="Vyberte datum aktuality" value={date} onChange={(newValue) => setDate(newValue)}/>
+                    <DatePicker label="Vyberte datum aktuality" value={date} onChange={(newValue) => setDate(newValue)} format="DD. MM. YYYY"/>
                     <DropzoneArea 
                         filesLimit={999}
                         acceptedFiles={['image/*']}

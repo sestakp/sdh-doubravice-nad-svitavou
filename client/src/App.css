@@ -1,8 +1,15 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   color: #fff;
+}
+
+h1, h2, h3, h4, h5, h6, a {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+a {
+  color: rgba(1, 111, 255, 0.938)
 }
 
 body{
@@ -18,6 +25,8 @@ video {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  opacity: 0.2;
+  position: fixed;
 }
 
 .content {
@@ -26,6 +35,10 @@ video {
   height: 100%;
   top: 0;
   color: white;
+}
+
+p {
+  font-size: 20px;
 }
 
 .overlay {

@@ -7,7 +7,7 @@ nav{
 .navWrap{
     display: flex;
     margin: auto;
-    width: 80%;
+    width: 90%;
     min-height: 100px;
     justify-content: space-evenly;
     align-items: center;
@@ -19,13 +19,90 @@ a{
   cursor: pointer;
 }
 
+.nav-link{
+
+  font-size: 22px !important;
+}
+
 .dropdown-menu{
   z-index: 3;
 }
+
+.title {
+  max-width: 40%;
+  text-align: center;
+}
+
+.desktop-menu{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.hamburger-menu-icon {
+  cursor: pointer;
+  display: none;
+}
+
+.hamburger-menu {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  -webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(10px);
+	background-color: rgba( 100, 100, 100, 1);
+  //font-size: 30px !important;
+}
+
+.hamburger-menu li a {
+
+  font-size: 30px;
+}
+
+.hamburger-menu a {
+  width: 100%;
+  text-align: center;
+  font-size: 40px !important;
+}
+
+
 @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
 	.nav-blur {
 	  -webkit-backdrop-filter: blur(10px);
 	  backdrop-filter: blur(10px);
 	  background-color: rgba( 100, 100, 100, 0.7);
 	}
+  }
+
+  @media screen and (max-width: 768px) {
+    .navWrap {
+      width: 90%; /* Adjust the width for better responsiveness on mobile */
+    }
+  
+    .desktop-menu {
+      display: none; /* Hide the desktop menu on mobile */
+    }
+  
+    .hamburger-menu-icon {
+      display: block; /* Show the hamburger menu icon on mobile */
+    }
+  
+    .responsive-menu.open {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    /* Show the responsive menu on mobile when the hamburger icon is clicked */
+    .responsive-menu {
+      display: none;
+    }
+
+    .title {
+      font-size: 16px;
+    }
+
   }

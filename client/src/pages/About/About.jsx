@@ -2,10 +2,11 @@ import React from "react";
 import About1 from "./assets/About-1.jpg";
 import About2 from "./assets/About-2.jpg";
 import "./About.css";
+import Timeline from "../../components/Timeline/Timeline";
 
 function About(){
     return(
-        <div className="About">
+        <div className="About" style={{position: "relative"}}>
             <h1>Úvodní slovo</h1>
             <div className="row p-2">
                 <div className="col-md-9">
@@ -29,6 +30,10 @@ function About(){
             </div>
             <strong>Milan Hubený</strong>
             
+
+
+
+            <Timeline />
         </div>
     )
 }

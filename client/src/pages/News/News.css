@@ -18,3 +18,21 @@ legend {
     visibility: visible !important;
     overflow: initial !important;
 }
+
+.select-mobile{
+    display: none !important;
+}
+
+.select-checkbox{
+    display: flex;
+}
+@media screen and (max-width: 768px) {
+
+.select-mobile{
+    display: inherit !important;
+}
+
+.select-checkbox{
+    display: none;
+}
+}

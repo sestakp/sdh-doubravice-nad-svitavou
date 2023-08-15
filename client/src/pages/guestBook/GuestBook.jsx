@@ -46,14 +46,21 @@ export default function GuestBook(){
 
     async function AddOrUpdateNew(){
         try {
-
             var record = {
                 author,
                 text: DOMPurify.sanitize(text),
                 date: (moment(new Date())).format(dateFormat)
             }
             
-            db.collection("GuestBook").add(record)
+            console.log("adding: ",id)
+
+            if(id != null){
+                db.collection("GuestBook").doc(id).update(record)
+            }
+            else{
+                db.collection("GuestBook").add(record)
+            }
+
         }
         catch(e){
             console.log("adding error: ", e)
@@ -79,7 +86,7 @@ export default function GuestBook(){
 
     useEffect(() => {
         console.log("downloading records")
-        const newsRef = db.collection("GuestBook");
+        const newsRef = db.collection("GuestBook").orderBy("date", "desc");
       
         const unsubscribe = newsRef.onSnapshot((snapshot) => {
           const data = snapshot.docs.map((doc) => ({
@@ -139,7 +146,7 @@ export default function GuestBook(){
                             </div>
                         </Grid>
                         <Grid item md={4} sm={12}>
-                            <div style={{width: "100%", textAlign: isMediumOrSmaller ? "inherit" : "end"}}>
+                            <div style={{width: "100%", textAlign: isMediumOrSmaller ? "inherit" : "end", marginTop: "10px"}}>
                                 <p>{contribution.date}</p>
                             </div>
                         </Grid>

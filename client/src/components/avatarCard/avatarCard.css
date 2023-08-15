@@ -10,3 +10,7 @@
     sans-serif;
     text-decoration: none;
 }
+
+.avatarCard p {
+    font-size: 1.5rem;
+}

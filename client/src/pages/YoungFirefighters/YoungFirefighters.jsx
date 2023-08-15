@@ -36,7 +36,11 @@ const YoungFirefighters = () =>{
                     <AvatarCard name="Havířová Marcela" role="Hlavní vedoucí"/>
                 </Grid>
                 <Grid md={4}>
-                    <AvatarCard name="Bárta Roman" role="Zástupce vedoucího" tel="(+420) 724 730 282"/>
+                    <AvatarCard 
+                        name="Bárta Roman" 
+                        role="Zástupce vedoucího" 
+                        //tel="(+420) 724 730 282"
+                    />
                 </Grid>
                 <Grid md={4}>
                     <AvatarCard name="Havířová Petra" role="Pomocní vedoucí"/>

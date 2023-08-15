@@ -1,0 +1,18 @@
+
+
+.dropZone{
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 50px;
+
+}
+
+.dropZone-text svg{
+    margin: auto;
+    display: flex;
+    font-size: 70px;
+}
+
+.dropZone-text p {
+    text-align: center;
+}

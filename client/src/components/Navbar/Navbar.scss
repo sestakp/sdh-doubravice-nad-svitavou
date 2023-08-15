@@ -54,12 +54,11 @@ a{
   -webkit-backdrop-filter: blur(10px);
 	backdrop-filter: blur(10px);
 	background-color: rgba( 100, 100, 100, 1);
-  //font-size: 30px !important;
 }
 
 .hamburger-menu li a {
 
-  font-size: 30px;
+  font-size: 2rem;
 }
 
 .hamburger-menu a {
@@ -103,6 +102,7 @@ a{
 
     .title {
       font-size: 16px;
+      cursor: pointer;
     }
 
   }

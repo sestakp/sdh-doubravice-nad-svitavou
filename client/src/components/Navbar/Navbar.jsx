@@ -28,8 +28,8 @@ function Navbar() {
   return (
     <nav className="nav-blur">
       <div className="navWrap">
-        <img src={logo} style={{maxHeight: "9vh"}}/>
-        <h2 className="title">
+        <img src={logo} style={{maxHeight: "9vh", cursor: "pointer"}} onClick={() => navigate("/")}/>
+        <h2 className="title" onClick={() => navigate("/")}>
           Sbor dobrovolných hasičů Doubravice nad Svitavou
         </h2>
 

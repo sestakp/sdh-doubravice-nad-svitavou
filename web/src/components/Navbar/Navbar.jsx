@@ -105,6 +105,7 @@ function Navbar() {
               <li><a className="dropdown-item" onClick={() => navigate("/slozeni-vyboru")}>Složení výboru</a></li>
               <li><a className="dropdown-item" onClick={() => navigate("/slozeni-jednotek")}>Složení JSDH</a></li>
               <li><a className="dropdown-item" onClick={() => navigate("/mladi-hasici")}>Mladí hasiči</a></li>
+              <li><a className="dropdown-item" onClick={() => navigate("/mladi-hasici-kviz")}>Kvíz</a></li>
             </ul>
           </div>
 

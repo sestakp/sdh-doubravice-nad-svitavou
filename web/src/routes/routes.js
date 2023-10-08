@@ -17,6 +17,10 @@ const ROUTES = [
         path: '/mladi-hasici'
     },
     {
+        name: 'YoungFirefightersQuiz',
+        path: '/mladi-hasici-kviz'
+    },
+    {
         name: 'Contact',
         path: '/kontakt'
     },

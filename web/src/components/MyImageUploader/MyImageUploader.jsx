@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import {useDropzone} from 'react-dropzone';
-import { CardMedia, Button, Card, CardContent, Typography, Grid } from '@mui/material';
+import { CardMedia, Card, CardContent, Typography, Grid } from '@mui/material';
 import "./MyImageUploader.css"
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import ImagePreview from './Components/ImagePreview/ImagePreview';

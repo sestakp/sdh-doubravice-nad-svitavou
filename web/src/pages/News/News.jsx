@@ -241,8 +241,8 @@ const News = (props) => {
                         margin="normal"
                         className={classes.label + " select select-mobile "}
                     >
-                        <MenuItem value={"Soutěže"}>Soutěže</MenuItem>
-                        <MenuItem value={"Soutěže jiné obce"}>Soutěže jiné obce</MenuItem>
+                        <MenuItem value={"Naše soutěže"}>Naše soutěže</MenuItem>
+                        <MenuItem value={"Ostatní soutěže"}>Ostatní soutěže</MenuItem>
                         <MenuItem value={"Plánovaná akce"}>Plánované akce</MenuItem>
                         <MenuItem value={"Zásah"}>Zásahy</MenuItem>
                         <MenuItem value={"Schůze"}>Schůze</MenuItem>
@@ -250,8 +250,8 @@ const News = (props) => {
                 </Select>
 
                 <div className="select-checkbox">
-                  <FormControlLabel control={<Checkbox onChange={(e) => checkBoxOnChange(e, "Soutěže")} />} label="Soutěže" />
-                  <FormControlLabel control={<Checkbox onChange={(e) => checkBoxOnChange(e, "Soutěže jiné obce")} />} label="Soutěže jiné obce" />
+                  <FormControlLabel control={<Checkbox onChange={(e) => checkBoxOnChange(e, "Naše soutěže")} />} label="Naše soutěže" />
+                  <FormControlLabel control={<Checkbox onChange={(e) => checkBoxOnChange(e, "Ostatní soutěže")} />} label="Ostatní soutěže" />
                   <FormControlLabel control={<Checkbox onChange={(e) => checkBoxOnChange(e, "Plánované akce")} />} label="Plánované akce" />
                   <FormControlLabel control={<Checkbox onChange={(e) => checkBoxOnChange(e, "Zásahy")} />} label="Zásahy" />
                   <FormControlLabel control={<Checkbox onChange={(e) => checkBoxOnChange(e, "Schůze")} />} label="Schůze" />
@@ -259,7 +259,9 @@ const News = (props) => {
                 </div>
 
                 {currentUser != undefined &&
-                    <Button variant="contained" style={{minWidth: "100px"}} onClick={() => setModalOpen(!modalOpen)}>Přidat novinku</Button>
+                    <Button variant="contained" style={{minWidth: "100px"}} onClick={() => setModalOpen(!modalOpen)}>
+                      <span style={{fontWeight: "bold", color: "black"}}>Přidat novinku</span>
+                    </Button>
                 } 
                 
                 </div>
@@ -300,8 +302,8 @@ const News = (props) => {
                         margin="normal"
                         className={classes.label + ", select"}
                     >
-                        <MenuItem value={"Soutěže"}>Soutěže</MenuItem>
-                        <MenuItem value={"Soutěže jiné obce"}>Soutěže jiné obce</MenuItem>
+                        <MenuItem value={"Naše soutěže"}>Naše soutěže</MenuItem>
+                        <MenuItem value={"Ostatní soutěže"}>Ostatní soutěže</MenuItem>
                         <MenuItem value={"Plánované akce"}>Plánované akce</MenuItem>
                         <MenuItem value={"Zásahy"}>Zásahy</MenuItem>
                         <MenuItem value={"Schůze"}>Schůze</MenuItem>
@@ -328,8 +330,12 @@ const News = (props) => {
                       </>
                     }
                     <div style={{display:"flex", justifyContent: "center", marginTop: "10px"}}>
-                        <Button variant="contained" onClick={() => AddOrUpdateNew() } disabled={loading}>Uložit</Button>
-                        <Button variant="contained" onClick={() => {setModalOpen(false); setId(null);}} disabled={loading}>Zavřít</Button>
+                        <Button variant="contained" onClick={() => AddOrUpdateNew() } disabled={loading} style={{marginRight: "7px"}}>
+                          <span style={{fontWeight: "bold", color: "black"}}>Uložit</span>
+                        </Button>
+                        <Button variant="contained" onClick={() => {setModalOpen(false); setId(null);}} disabled={loading}>
+                          <span style={{fontWeight: "bold", color: "black"}}>Zavřít</span>
+                        </Button>
                     </div>
                     </Typography>
                 </Box>

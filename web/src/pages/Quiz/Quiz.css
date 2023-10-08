@@ -1,0 +1,47 @@
+
+
+.btn {
+    background-color: rgb(178, 106, 0) !important;
+    font-weight: bold !important;
+    border: none !important;
+    font-size: 18px !important;
+    color: black !important;
+}
+
+.correct{
+
+    background-color: green !important;
+}
+
+.incorrect{
+
+    background-color: red !important;
+}
+
+select{
+    background-color: rgb(178, 106, 0) !important;
+
+    color: black !important;
+    width: auto;
+    height: auto !important;
+}
+
+.quiz-result-filter{
+    width: auto !important;
+}
+
+.questionWrapperBody img, .result-answer-wrapper img{
+    max-height: 200px !important;
+    width: auto !important;
+    position: relative;
+    margin: auto;
+    left: 50%;
+    transform: translateX(-50%);
+
+}
+
+
+.react-quiz-container{
+    width: auto !important;
+
+}

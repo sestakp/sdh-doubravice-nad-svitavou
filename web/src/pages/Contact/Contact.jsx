@@ -32,11 +32,10 @@ const Contact = (props) => {
                 </Grid>
             </Grid>
             
-            <p>Bankovní spojení</p>
-            <p>213935862/0300</p>
-
-            <p>Kontaktní email</p>
-            <a href="mailto:sdhdoubravice@seznam.cz">sdhdoubravice@seznam.cz</a>
+            <p>Bankovní spojení: 213935862/0300</p>
+            <br />
+            <p>Kontaktní email: <a href="mailto:sdhdoubravice@seznam.cz">sdhdoubravice@seznam.cz</a></p>
+            
         </div>
     )
 }

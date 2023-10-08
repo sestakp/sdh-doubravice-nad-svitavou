@@ -84,11 +84,11 @@ const NewCard = ({data, setModalOpen, setId}) => {
         <Typography id="delete-confirmation-modal-description" variant="h6" component="h2">
           Opravdu si přejete smazat novinku?
         </Typography>
-        <Button variant="outlined" color="primary" onClick={() => {deleteDocument(data.id); setDeleteModalOpen(false);}} sx={{ mt: 2 }}>
-          Smazat
+        <Button variant="contained" color="primary" onClick={() => {deleteDocument(data.id); setDeleteModalOpen(false);}} sx={{ mt: 2 }}>
+          <span style={{fontWeight: "bold", color: "black"}}>Smazat</span>
         </Button>
-        <Button variant="outlined" color="secondary" onClick={() => setDeleteModalOpen(false)} sx={{ mt: 2, ml: 2 }}>
-          Zrušit
+        <Button variant="contained" color="secondary" onClick={() => setDeleteModalOpen(false)} sx={{ mt: 2, ml: 2 }}>
+          <span style={{fontWeight: "bold", color: "black"}}>Zrušit</span>
         </Button>
       </Box>
     </Modal>

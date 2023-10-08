@@ -79,12 +79,14 @@ function Navbar() {
                     </div>
 
                     {currentUser == undefined &&
+                      <div>
                         <a className="nav-link" onClick={() => {navigate("/prihlaseni"); handleMenuToggle()}}>Přihlášení</a>
+                      </div>
                     }
                     {currentUser != undefined &&
                         <div style={{textAlign: "center", paddingTop: "100px"}}>
-                        <p style={{fontSize: "30px", margin: 0}} >{currentUser.email}</p>
-                        <a onClick={() => {logout(); handleMenuToggle()}}>Odhlásit</a>
+                          <p style={{fontSize: "30px", margin: 0}} >{currentUser.email}</p>
+                          <a onClick={() => {logout(); handleMenuToggle()}} style={{fontSize: "22px"}}>Odhlásit</a>
                         </div>
                     }
                 </div>
@@ -129,13 +131,15 @@ function Navbar() {
           </div>
 
           {currentUser == undefined &&
-            <a className="nav-link" onClick={() => navigate("/prihlaseni")}>Přihlášení</a>
+            <div>
+              <a className="nav-link" onClick={() => navigate("/prihlaseni")}>Přihlášení</a>
+            </div>
           }
           {currentUser != undefined &&
-            <>
-              <span>{currentUser.email}</span>
-              <a onClick={() => logout()}>Odhlásit</a>
-            </>
+            <div>
+              {/*<span>{currentUser.email}</span>*/}
+              <a className="nav-link" onClick={() => logout()}>Odhlásit</a>
+            </div>
           }
         </div>
       </div>

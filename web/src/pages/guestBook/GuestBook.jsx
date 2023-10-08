@@ -127,7 +127,9 @@ export default function GuestBook(){
                 <h1>Kniha návštěv</h1>
 
                 <div style={{display: "flex", justifyContent: "flex-end", width: "25%"}}>
-                    <Button variant="contained" onClick={() => {setAuthor(""); setText(""); setModalOpen(!modalOpen)}}>Přidat příspěvek</Button>
+                    <Button variant="contained" onClick={() => {setAuthor(""); setText(""); setModalOpen(!modalOpen)}}>
+                        <span style={{fontWeight: "bold", color: "black"}}>Přidat příspěvek</span>
+                    </Button>
                 </div>
             </div>
 
@@ -174,7 +176,7 @@ export default function GuestBook(){
                 >
                 <Box sx={style}>
                     <Typography id="modal-modal-title" variant="h6" component="h2">
-                    Přidat novinku
+                    Přidat příspěvek
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                     <TextField
@@ -189,8 +191,12 @@ export default function GuestBook(){
                     
                     <ReactQuill value={text} onChange={setText} modules={modules} formats={formats}/>
                     <div style={{display:"flex", justifyContent: "center", marginTop: "10px"}}>
-                        <Button variant="contained" onClick={() => AddOrUpdateNew() }>Uložit</Button>
-                        <Button variant="contained" onClick={() => {setModalOpen(false); setId(null);}}>Zavřít</Button>
+                        <Button variant="contained" onClick={() => AddOrUpdateNew() } style={{marginRight: "7px"}}>
+                            <span style={{fontWeight: "bold", color: "black"}}>Uložit</span>
+                        </Button>
+                        <Button variant="contained" onClick={() => {setModalOpen(false); setId(null);}}  >
+                            <span style={{fontWeight: "bold", color: "black"}}>Zavřít</span>
+                        </Button>
                     </div>
                     </Typography>
                 </Box>

@@ -68,9 +68,9 @@ const Login = (props) => {
                         margin="normal"
                         required
                     />
-                    <div style={{width: "100%"}}>
-                        <Button type="submit" variant="contained" color="primary" style={{display: "flex", margin: "auto"}}>
-                            Log In
+                    <div style={{width: "100%", margin: "auto", display: "flex", justifyContent: "center"}}>
+                        <Button type="submit" variant="contained" color="primary" style={{ marginTop: "7px"}}>
+                            <span style={{fontWeight: "bold", color: "black"}}>Přihlásit</span>
                         </Button>
                     </div>
 

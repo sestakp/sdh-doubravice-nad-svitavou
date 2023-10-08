@@ -59,19 +59,19 @@ function InfoSidePanel(props){
 
     return(
         <div style={{paddingLeft: "20px"}}>
-            <h2>Novinky</h2>
+            <h2 style={{padding: "5px", margin: "5px"}}>Novinky</h2>
             {newsData.map(newsItem => (
                 <div style={{padding: "5px", margin: "5px", borderBottom: "1px solid white"}}>
                     <h5>{newsItem.header} ({newsItem.date})</h5>
                     <p>{newsItem.description}</p>
                 </div>
             ))}
-            <h2>Kniha návštěv</h2>
+            <h2 style={{padding: "5px", margin: "5px", marginTop: "100px"}}>Kniha návštěv</h2>
             {guestBookData.map(guestBookItem => (
-                <div style={{borderBottom: "1px solid white"}}>
+                <div style={{padding: "5px", margin: "5px", borderBottom: "1px solid white"}}>
                     <h5>{guestBookItem.author} napsal:</h5>
                     <div>
-                        <div style={{padding: "5px"}} dangerouslySetInnerHTML={{ __html: guestBookItem.text }} />
+                        <div style={{ }} dangerouslySetInnerHTML={{ __html: guestBookItem.text }} />
                     </div>
                 </div>
             ))}

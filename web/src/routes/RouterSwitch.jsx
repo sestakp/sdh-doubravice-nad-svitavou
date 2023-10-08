@@ -16,6 +16,7 @@ import Cas25 from '../pages/Equipment/CAS25/Cas25';
 import Pps8 from '../pages/Equipment/PPS8/Pps8';
 import Pps12 from '../pages/Equipment/PPS12/Pps12';
 import GuestBook from '../pages/guestBook/GuestBook';
+import YoungFirefightersQuiz from '../pages/Quiz/Quiz';
 
 
 const RouterSwitch = () => {
@@ -40,6 +41,11 @@ const RouterSwitch = () => {
                     <Route
                         element={<YoungFirefighters />}
                         path={getRoute('YoungFirefighters').path}
+                        exact
+                    />
+                    <Route
+                        element={<YoungFirefightersQuiz />}
+                        path={getRoute('YoungFirefightersQuiz').path}
                         exact
                     />
 

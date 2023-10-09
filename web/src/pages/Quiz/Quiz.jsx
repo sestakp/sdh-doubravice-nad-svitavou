@@ -8,9 +8,12 @@ function YoungFirefightersQuiz(){
 
     
     return(
-        <div>
-            <Quiz quiz={quizData} shuffle={true}/>
-        </div>
+        <>
+            <p>Kvíz je stále ve výstavbě!!</p>
+            <div>
+                <Quiz quiz={quizData} shuffle={true}/>
+            </div>
+        </>
     )
 
 }

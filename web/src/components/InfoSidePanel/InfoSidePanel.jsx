@@ -10,6 +10,17 @@ function InfoSidePanel(props){
     const [newsData, setNewsData] = useState([]);
     const [guestBookData, setGuestBookData] = useState([]);
     
+
+    function clipText(text){
+
+      console.log("text length: ", text.length)
+      if(text.length > 100){
+        console.log("clipping: ", text.slice(0, 100) + "...")
+        return text.slice(0, 100) + "..."
+      }
+      return text;
+    }
+
     
     useEffect(() => {
         const newsRef = db.collection("News");
@@ -60,15 +71,15 @@ function InfoSidePanel(props){
     return(
         <div style={{paddingLeft: "20px"}}>
             <h2 style={{padding: "5px", margin: "5px"}}>Novinky</h2>
-            {newsData.map(newsItem => (
-                <div style={{padding: "5px", margin: "5px", borderBottom: "1px solid white"}}>
+            {newsData.map((newsItem,index) => (
+                <div style={{padding: "5px", margin: "5px", borderBottom: "1px solid white"}}  key={"sidePanel_new_news"+index}>
                     <h5>{newsItem.header} ({newsItem.date})</h5>
-                    <p>{newsItem.description}</p>
+                    <p>{clipText(newsItem.description)}</p>
                 </div>
             ))}
             <h2 style={{padding: "5px", margin: "5px", marginTop: "100px"}}>Kniha návštěv</h2>
-            {guestBookData.map(guestBookItem => (
-                <div style={{padding: "5px", margin: "5px", borderBottom: "1px solid white"}}>
+            {guestBookData.map((guestBookItem,index) => (
+                <div style={{padding: "5px", margin: "5px", borderBottom: "1px solid white"}} key={"sidePanel_new_guestBook"+index}>
                     <h5>{guestBookItem.author} napsal:</h5>
                     <div>
                         <div style={{ }} dangerouslySetInnerHTML={{ __html: guestBookItem.text }} />

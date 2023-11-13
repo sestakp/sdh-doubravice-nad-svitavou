@@ -128,103 +128,93 @@ const News = (props) => {
       }, []);
 
 
-    async function AddOrUpdateNew(){
+      async function AddOrUpdateNew() {
         try {
-            setLoading(true);
-            var record = {
-                header,
-                category,
-                description,
-                date: date?.format(dateFormat) ?? "",
-                //imageUrls
-            }
-
-            let recordId = id;
-            if(id != null){
-              db.collection("News").doc(id).update(record)
-            }
-            else{
-                const docRef = await db.collection("News").add(record)
-                recordId = docRef.id;
-            }
-
-            console.log("record id : ", recordId)
-
-
-            const imageUrls = []
-
-            let defaultImageNames = defaultImages?.map(url => extractFileName(url))
-
-            console.log("default images: ", defaultImageNames)
-            for (const image of images) {
-
-              const storageRef = storage.ref(`images/${image.name}_${recordId}`);
-              
-
-              if( ! defaultImageNames.includes(image.name)){
-                
-                const uploadTask = storageRef.put(image);
-                
-                uploadTask.on(
-                  'state_changed',
-                  (snapshot) => {
-                    /*console.log("bytesTransferred: ", snapshot.bytesTransferred)
-                    console.log("totalBytes: ", snapshot.totalBytes)
-                    const progress = Math.round(
-                      (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-                    );*/
-
-                      if(snapshot.bytesTransferred == snapshot.totalBytes){
-                        setUploadProgress((prevUploadProgress) => prevUploadProgress + 1)
-                      }
-
-                  },
-                  (error) => {
-                    console.error(error);
+          setLoading(true);
+          var record = {
+            header,
+            category,
+            description,
+            date: date?.format(dateFormat) ?? "",
+          };
+      
+          let recordId = id;
+          if (id != null) {
+            db.collection("News").doc(id).update(record);
+          } else {
+            const docRef = await db.collection("News").add(record);
+            recordId = docRef.id;
+          }
+      
+          console.log("record id : ", recordId);
+      
+          const imageUrls = [];
+      
+          let defaultImageNames = defaultImages?.map((url) => extractFileName(url));
+      
+          console.log("default images: ", defaultImageNames);
+          for (const image of images) {
+            const storageRef = storage.ref(`images/${image.name}_${recordId}`);
+      
+            if (!defaultImageNames.includes(image.name)) {
+              const uploadTask = storageRef.put(image);
+      
+              uploadTask.on(
+                'state_changed',
+                (snapshot) => {
+                  if (snapshot.bytesTransferred === snapshot.totalBytes) {
+                    setUploadProgress((prevUploadProgress) => prevUploadProgress + 1);
                   }
-                );
-        
-                await uploadTask;
-              }
-              
-              const imageUrl = await storageRef.getDownloadURL();
-              imageUrls.push(imageUrl);
+                },
+                (error) => {
+                  console.error(error);
+                }
+              );
+      
+              await uploadTask;
             }
-
-            if(Array.isArray(defaultImages)){
-              for(const image of defaultImages){
-                //console.log("image: ", image)
-                if( ! imageUrls.includes(image)){
-                  console.log("default image not included: ", extractFileName(image))
-  
-  
+      
+            const imageUrl = await storageRef.getDownloadURL();
+            imageUrls.push(imageUrl);
+          }
+      
+          if (Array.isArray(defaultImages)) {
+            for (const image of defaultImages) {
+              if (!imageUrls.includes(image)) {
+                console.log("default image not included: ", extractFileName(image));
+      
+                try {
                   const storageRef = storage.ref(`images/${extractFileName(image)}_${recordId}`);
-                  storageRef.delete()
+                  await storageRef.delete();
+                } catch (deleteError) {
+                  if (deleteError.code === 'storage/object-not-found') {
+                    console.log('Object not found:', deleteError.message);
+                  } else {
+                    console.error('Error deleting object:', deleteError);
+                  }
                 }
               }
             }
-
-            record.imageUrls = imageUrls
-            db.collection("News").doc(recordId).update(record)
-
-            
-        }
-        catch(e){
-            console.log("adding error: ", e)
-        }
-        finally{
+          }
+      
+          record.imageUrls = imageUrls;
+          await db.collection("News").doc(recordId).update(record);
+        } catch (e) {
+          console.log("adding error: ", e);
+        } finally {
           setLoading(false);
         }
-
-        setImages([])
-        setHeader("")
-        setDate(null)
-        setCategory("Ostatní")
-        setDescription("")
-        setId(null)
-        setModalOpen(false)
-        setUploadProgress(0)
-    }
+      
+        setImages([]);
+        setHeader("");
+        setDate(null);
+        setCategory("Ostatní");
+        setDescription("");
+        setId(null);
+        setModalOpen(false);
+        setUploadProgress(0);
+      }
+      
     return (
         <div>
             <div style={{display: "flex", justifyContent: "space-between"}}>

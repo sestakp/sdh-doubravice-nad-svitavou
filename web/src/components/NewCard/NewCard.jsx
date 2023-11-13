@@ -23,10 +23,24 @@ const NewCard = ({data, setModalOpen, setId}) => {
 
           var newObj = (await newsRef.get()).data();
 
-          newObj.imageUrls?.forEach(url => {            
-            const storageRef = storage.ref(`images/${extractFileName(url)}_${id}`);
-            storageRef.delete()
-          });
+          if (newObj.imageUrls !== undefined && Array.isArray(newObj.imageUrls) && typeof newObj.imageUrls.forEach === 'function'){
+            newObj.imageUrls?.forEach(url => {     
+              try{
+                console.log("url: ", `images/${extractFileName(url)}_${id}`)
+                const storageRef = storage.ref(`images/${extractFileName(url)}_${id}`);
+                storageRef.delete()
+              } 
+              catch(error){
+                if (error.code === 'storage/object-not-found') {
+                  // Object not found, it's okay since you wanted to delete it anyway
+                  console.log('Object not found:', error.message);
+                } else {
+                  // Handle other errors
+                  console.error('Error deleting object:', error);
+                }
+              }
+            });
+          }
 
           await newsRef.delete();
           console.log("Document deleted successfully");
@@ -68,7 +82,7 @@ const NewCard = ({data, setModalOpen, setId}) => {
         {
             open &&
             <div style={{paddingTop: "20px"}}>
-                <ImageGallery items={data.imageUrls?.map(url => ({original: url, thumbnail: url}))} />
+                {Array.isArray(data.imageUrls) && <ImageGallery items={data.imageUrls?.map(url => ({original: url, thumbnail: url}))} /> }
             </div>
             
         }

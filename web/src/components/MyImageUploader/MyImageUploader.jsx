@@ -8,7 +8,7 @@ import Compressor from 'compressorjs';
 
 
 const MyImageUploader = (props) => {
-    
+    /*
     const onDrop = useCallback((acceptedFiles) => {
         //const filesToAdd = [];
         acceptedFiles.forEach((file) => {
@@ -26,7 +26,7 @@ const MyImageUploader = (props) => {
 
 
               const options = {
-                quality: 0.8, // Adjust the quality as needed
+                quality: 0.7, // Adjust the quality as needed
                 maxWidth: 1920, // Adjust the maximum width as needed
                 maxHeight: 1080, // Adjust the maximum height as needed
 
@@ -49,7 +49,49 @@ const MyImageUploader = (props) => {
         //console.log("adding images: ", filesToAdd)
         //props.setImages((prevImages) => [...prevImages, ...filesToAdd]);
 
-      }, [props.setImages])
+      }, [props.setImages])*/
+
+
+      const onDrop = useCallback(async (acceptedFiles) => {
+        try {
+          const compressedImages = await Promise.all(
+            acceptedFiles.map(async (file) => {
+              return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+      
+                reader.onabort = () => reject('file reading was aborted');
+                reader.onerror = () => reject('file reading has failed');
+                reader.onload = async () => {
+                  const arrayBuffer = reader.result;
+                  const blob = new Blob([arrayBuffer]);
+                  const newFile = new File([blob], file.name, { type: file.type });
+      
+                  const options = {
+                    quality: 0.7,
+                    maxWidth: 1920,
+                    maxHeight: 1080,
+                    success(result) {
+                      const compressedImage = new File([result], file.name, { type: file.type });
+                      resolve(compressedImage);
+                    },
+                    error(err) {
+                      reject(err);
+                    },
+                  };
+      
+                  new Compressor(newFile, options);
+                };
+                reader.readAsArrayBuffer(file);
+              });
+            })
+          );
+      
+          props.setImages((prevImages) => [...prevImages, ...compressedImages]);
+        } catch (error) {
+          console.error('Error compressing images:', error);
+        }
+      }, [props.setImages]);
+      
 
 
       const { getRootProps, getInputProps, isDragActive } = useDropzone({

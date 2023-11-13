@@ -13,9 +13,7 @@ function InfoSidePanel(props){
 
     function clipText(text){
 
-      console.log("text length: ", text.length)
       if(text.length > 100){
-        console.log("clipping: ", text.slice(0, 100) + "...")
         return text.slice(0, 100) + "..."
       }
       return text;
